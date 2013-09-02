@@ -1,0 +1,22 @@
+{
+  "name": "fis-repo-client",
+  "version": "0.0.0",
+  "description": "fis-repo-client",
+  "main": "fis-repo-client.js",
+  "dependencies": {
+      "ini": "1.0.0",
+      "request" : "2.27.0",
+      "js-base64" : "2.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "fis",
+    "fis-repo",
+    "fis-repo-client"
+  ],
+  "author": "fis-team",
+  "license": "BSD"
+}
