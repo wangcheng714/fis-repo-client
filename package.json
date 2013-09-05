@@ -6,7 +6,9 @@
   "dependencies": {
       "ini": "1.0.0",
       "request" : "2.27.0",
-      "js-base64" : "2.1.2"
+      "js-base64" : "2.1.2",
+      "iconv-lite" : "0.2.11",
+      "archiver" : "0.4.9"
   },
   "devDependencies": {},
   "scripts": {
