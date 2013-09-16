@@ -1,6 +1,6 @@
 {
   "name": "fis-repo-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "fis-repo-client",
   "main": "fis-repo-client.js",
   "dependencies": {
@@ -26,11 +26,5 @@
   },
   "license": "BSD",
   "readme": "fis-repo-client\r\n===============\r\n",
-  "readmeFilename": "README.md",
-  "_id": "fis-repo-client@0.0.1",
-  "dist": {
-    "shasum": "1028b5ea736ea211108d2123a0e1c64416f92502"
-  },
-  "_from": "fis-repo-client@0.0.1",
-  "_resolved": "https://registry.npmjs.org/fis-repo-client/-/fis-repo-client-0.0.1.tgz"
+  "readmeFilename": "README.md"
 }
