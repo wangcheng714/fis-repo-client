@@ -10,7 +10,7 @@
     "iconv-lite": "0.2.11",
     "archiver": "0.4.9",
     "adm-zip": "0.4.3",
-    "async" : "0.2.9"
+    "async": "0.2.9"
   },
   "devDependencies": {},
   "scripts": {
@@ -26,5 +26,11 @@
   },
   "license": "BSD",
   "readme": "fis-repo-client\r\n===============\r\n",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "_id": "fis-repo-client@0.0.2",
+  "dist": {
+    "shasum": "d5dbbf2ab14b3f8ad8ec4c394cb3376122242d49"
+  },
+  "_from": "fis-repo-client@0.0.2",
+  "_resolved": "https://registry.npmjs.org/fis-repo-client/-/fis-repo-client-0.0.2.tgz"
 }
