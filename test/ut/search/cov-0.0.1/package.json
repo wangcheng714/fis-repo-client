@@ -1,0 +1,27 @@
+{
+  "name": "cov",
+  "version": "0.0.1",
+  "description": "JS code coverage tool",
+  "keywords": [
+    "coverage",
+    "code coverage",
+    "JS code coverage",
+    "JS coverage"
+  ],
+  "author": {
+    "name": "tanwenmin",
+    "email": "tanwenmin@baidu.com"
+  },
+  "bin": {
+    "smart-cov": "./cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tanwenmin/cov-0.0.1.git"
+  },
+  "dependencies": {
+    "escodegen": "0.0.x",
+    "mkdirp": "0.3.x"
+  },
+  "readme": "cov-1"
+}
