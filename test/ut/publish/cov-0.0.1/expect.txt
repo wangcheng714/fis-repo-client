@@ -1,0 +1,25 @@
+  {
+    "name": "cov",
+    "version": "0.0.1",
+    "description": "JS code coverage tool",
+    "keywords": [
+      "coverage",
+      "code coverage",
+      "JS code coverage",
+      "JS coverage"
+    ],
+    "author": {
+      "name": "tanwenmin",
+      "email": "tanwenmin@baidu.com"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/tanwenmin/cov-0.0.1.git"
+    },
+    "_id": "cov",
+    "maintainers": [
+      {
+        "name": "tan"
+      }
+    ]
+  }

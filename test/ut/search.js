@@ -1,16 +1,18 @@
 var RepoClient = require("../../fis-repo-client.js"),
-    client = new RepoClient();
+    domain = "localhost",
+    port = "3459",
+    client = new RepoClient(domain,port);
 var expect = require('chai').expect;
 var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
 var fs = require('fs');
 
 describe('search', function(){
-    var dir1 = __dirname+'/search/smart-cov-0.0.1';
-    var dir2 = __dirname+'/search/smart-cov-0.0.2';
-    var dir3 = __dirname+'/search/cov-0.0.1';
-    var result1 = fs.readFileSync(dir1+'/expect.txt','utf-8');
-    var result2 = fs.readFileSync(dir2+'/expect.txt','utf-8');
-    var result3 = fs.readFileSync(dir3+'/expect.txt','utf-8');
+    var dir1 = __dirname+'/publish/4';              //smart-cov-0.0.1
+    var dir2 = __dirname+'/publish/6';              //smart-cov-0.0.2
+    var dir3 = __dirname+'/publish/cov-0.0.1';      //cov-0.0.1
+    var result1 = fs.readFileSync(dir1+'/expect.txt','utf-8').replace(/\r\n/g, '\n');
+    var result2 = fs.readFileSync(dir2+'/expect.txt','utf-8').replace(/\r\n/g, '\n');
+    var result3 = fs.readFileSync(dir3+'/expect.txt','utf-8').replace(/\r\n/g, '\n');
     before(function(done){
         client.adduser('tan','tan','tan@baidu.com',function(){
             client.publish(dir1, {}, function(){
@@ -34,39 +36,26 @@ describe('search', function(){
         });
     });
     it('search name',function(done){
+        //同一个包只能搜到最新版本包的信息
+        client.search("smart-cov",function(err,msg){
+            // fs.writeFileSync('ttt.txt',msg);
+            expect(msg).to.deep.equal("[\n"+result2+"\n]");
 
-//       client.publish(dir3, {}, function(){
-           client.search("smart-cov",function(err,msg){
-               expect(msg).to.deep.equal("[\n"+result2+"\n]");
-               client.search("cov",function(err,msg){
-                   expect(msg).to.deep.equal("[\n"+result2+result3+"\n]");
+            client.search("cov",function(err,msg){
+                expect(msg).to.deep.equal("[\n"+result2+",\n"+result3+"\n]");
 
-//                   client.unpublish(dir3, {}, function(){
-                       client.search("Smart-cov",function(err,msg){
-                           expect(msg).to.deep.equal("[]");
+                    client.search("Smart-cov",function(err,msg){
+                        expect(msg).to.deep.equal("[]");
 
-                           done();
-                       });
-//                   });
-               });
-             });
-
-//        });
-
-    });
-
-    it('search maintainer',function(done){
-        client.search("tan",function(err,msg){
-            expect(msg).to.deep.equal("[\n"+result2+result3+"\n]");
-
-            done();
+                        done();
+                    });
+            });
         });
+
     });
 
     it('search description',function(done){
         client.search("that computes statement",function(err,msg){
-            console.log(err)
-            console.log(msg)
             expect(msg).to.deep.equal("[\n"+result2+"\n]");
 
             done();
@@ -75,15 +64,15 @@ describe('search', function(){
     });
 
     it('search keywords',function(done){
-        client.search("code",function(err,msg){
-            console.log(err)
-            console.log(msg)
-            expect(msg).to.deep.equal("[\n"+result3+"\n]");
+        client.search("function and branch coverage",function(err,msg){
+            // console.log(err)
+            // console.log(msg)
+            expect(msg).to.deep.equal("[\n"+result2+"\n]");
 
-            client.search("JS",function(err,msg){
-                console.log(err)
-                console.log(msg)
-                expect(msg).to.deep.equal("[\n"+result2+result3+"\n]");
+            client.search("JS code",function(err,msg){
+                // console.log(err)
+                // console.log(msg)
+                expect(msg).to.deep.equal("[\n"+result2+",\n"+result3+"\n]");
 
                 done();
             });
@@ -94,19 +83,19 @@ describe('search', function(){
     it('search repository',function(done){
         //author 1 and 3 have tanwenmin, repository all have tanwenmin
         client.search("tanwenmin",function(err,msg){
-            expect(msg).to.deep.equal("[\n"+result2+result3+"\n]");
+            expect(msg).to.deep.equal("[\n"+result3+"\n]");
 
             client.search("/tanwenmin",function(err,msg){
-                expect(msg).to.deep.equal("[\n"+result2+result3+"\n]");
+                expect(msg).to.deep.equal("[\n"+result3+"\n]");
 
                 client.search("git://github.com/",function(err,msg){
-                    expect(msg).to.deep.equal("[\n"+result2+result3+"\n]");
+                    expect(msg).to.deep.equal("[\n"+result2+",\n"+result3+"\n]");
 
                     client.search("://github.",function(err,msg){
-                        expect(msg).to.deep.equal("[\n"+result2+result3+"\n]");
+                        expect(msg).to.deep.equal("[\n"+result2+",\n"+result3+"\n]");
 
                         client.search("//github",function(err,msg){
-                            expect(msg).to.deep.equal("[\n"+result2+result3+"\n]");
+                            expect(msg).to.deep.equal("[\n"+result2+",\n"+result3+"\n]");
 
                             done();
                         });
@@ -115,7 +104,6 @@ describe('search', function(){
                 });
 
             });
-
         });
 
     });
@@ -144,9 +132,7 @@ describe('search', function(){
     it('array query',function(done){
 
         client.search(["code"],function(err,msg){
-            console.log(err)
-            console.log(msg)
-            expect(msg).to.deep.equal("[\n"+result3+"\n]");
+            expect(msg).to.deep.equal("[\n"+result2+",\n"+result3+"\n]");
 
             done();
         });

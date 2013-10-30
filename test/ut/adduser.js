@@ -1,6 +1,8 @@
 var expect = require('chai').expect;
-var RepoClient = require("../../fis-repo-client.js");
-var client = new RepoClient();
+var RepoClient = require("../../fis-repo-client.js"),
+    domain = "localhost",
+    port = "3459",
+    client = new RepoClient(domain,port);
 var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
 
 describe('basic', function(){
@@ -71,7 +73,7 @@ describe('basic', function(){
     it('second time - update email', function(done){
         client.adduser('tian', 'tian', 't@baidu.com', function(error, message){
             expect(message).to.equal("Adduser success!");
-            fis.db.findOne("user", "tian", {name : "tian"}, function(err, result){debugger
+            fis.db.findOne("user", "tian", {name : "tian"}, function(err, result){
                 expect(result.email).to.equal("t@baidu.com");
                 done();
             });

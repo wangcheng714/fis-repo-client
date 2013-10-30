@@ -1,6 +1,8 @@
 var expect = require('chai').expect;
-var RepoClient = require("../../fis-repo-client.js");
-var client = new RepoClient();
+var RepoClient = require("../../fis-repo-client.js"),
+    domain = "localhost",
+    port = "3459",
+    client = new RepoClient(domain,port);
 var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
 
 describe("publish", function(){
@@ -33,7 +35,7 @@ describe("publish", function(){
             version : "all"
         };
         client.unpublish(pkg, {}, function(error, message){
-            client.publish("./publish/4", {}, function(error, message){
+            client.publish("./publish/4", {}, function(error, message){console.log(error);console.log(message);
                 expect(message).to.equal("\"Publish component [smart-cov@0.0.1] success!\"");
                 fis.db.findOne("pkgs", "tian", {name : "smart-cov"}, function(error, pkg){
                     expect(pkg.version).to.equal("0.0.1");

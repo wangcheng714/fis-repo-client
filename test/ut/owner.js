@@ -1,6 +1,8 @@
 
 var RepoClient = require("../../fis-repo-client.js"),
-    client = new RepoClient();
+    domain = "localhost",
+    port = "3459",
+    client = new RepoClient(domain,port);
 var expect = require('chai').expect;
 var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
 
@@ -15,32 +17,18 @@ describe('add--', function(){
         name : "smart-cov",
         version : "0.0.2"
     };
-    before(function(done){
-        //实现初始化数据库及用户
-        fis.db.remove("user", "tan", {name : "tan"}, {}, function(){
-            fis.db.remove("user", "lily", {name : "lily"}, {}, function(){
-                done();
-            });
-        });
+ 
+    // it('no adder',function(done){
+    //     var options = {
+    //         username : "tan"
+    //     };
 
-    });
-//    afterEach(function(){
-//        //实现初始化数据库及用户
-//        fis.db.remove("user", "tan", {name : "tan"}, {}, function(){});
-//        fis.db.remove("user", "lily", {name : "lily"}, {}, function(){});
-//    });
+    //     client.owner('add', pkg1, options, function(error){
+    //         expect(error).to.be.equal("User [tan] not exist, register first!");
+    //         done();
+    //     });
 
-    it('no adder',function(done){
-        var options = {
-            username : "tan"
-        };
-
-        client.owner('add', pkg1, options, function(error){
-            expect(error).to.be.equal("User [tan] not exist, register first!");
-            done();
-        });
-
-    });
+    // });
 
     it('add owner to pkg not exist + ls non-exist pkg', function(done){
         var options = {
@@ -71,12 +59,12 @@ describe('add--', function(){
 
                 client.owner('add',pkg1, options,function(error){
                     expect(error).to.be.equal("User [lily] not exist, register first!");
-
-                    client.owner('ls',pkg1,{username:"tan"}, function(err, msg){
-                        expect(msg).to.be.equal("\nusername : tan email : tan@baidu.com\n");
+                    
+                    // client.owner('ls',pkg1,{}, function(err, msg){
+                    //     expect(msg).to.be.equal("\nusername : tan email : tan@baidu.com\n");
 
                         done();
-                    });
+                    // });
 
                 });
 
@@ -129,7 +117,7 @@ describe('add--', function(){
                 client.owner('add',pkg1, options,function(error,msg){
                     expect(msg).to.be.equal("Add user [lily] success!");
 
-                    client.owner('ls',pkg1,{username:"lily"}, function(err, msg){
+                    client.owner('ls',pkg1,{}, function(err, msg){
                         expect(msg).to.be.equal("\nusername : tan email : tan@baidu.com\nusername : lily email : lily@baidu.com\n");
 
 //                        client.owner('ls',pkg2,{username:"lily"}, function(err, msg){
@@ -162,7 +150,9 @@ describe('delete--', function(){
         client.unpublish(__dirname+'/publish/4', {}, function(){
 //            client.unpublish(__dirname+'/publish/6', {}, function(){
                 fis.db.remove("user", "tan", {name : "tan"}, {}, function(){
-                    done();
+                    fis.db.remove("user", "tmp", {name : "tan"}, {}, function(){
+                        done();
+                    });
                 });
 //            });
         });
@@ -176,7 +166,7 @@ describe('delete--', function(){
         client.owner('rm',pkg1,options, function(err, msg){
             expect(msg).to.be.equal("Remove user [lily] success!");
 
-            client.owner('ls',pkg1,{username:"lily"}, function(err, msg){
+            client.owner('ls',pkg1,{}, function(err, msg){
                 expect(msg).to.be.equal("\nusername : tan email : tan@baidu.com\n");
 
 //                client.owner('ls',pkg2,{username:"lily"}, function(err, msg){
@@ -256,21 +246,24 @@ describe('delete--', function(){
             username : "tan"
         };
 
-        client.unpublish(pkg1, {}, function(){
-            client.owner('rm',pkg1,options, function(err){
-                expect(err).to.be.equal("Component [smart-cov@0.0.1] not found!");
+        client.adduser('tan','tan','tan@baidu.com',function(){
+            client.unpublish(pkg1, {}, function(){
+                client.owner('rm',pkg1,options, function(err){
+                    expect(err).to.be.equal("Component [smart-cov@0.0.1] not found!");
 
-//                client.unpublish(pkg2, {}, function(){
+    //                client.unpublish(pkg2, {}, function(){
 
-//                    client.owner('ls',pkg2,{}, function(err){
-//                        expect(err).to.be.equal("error");
+    //                    client.owner('ls',pkg2,{}, function(err){
+    //                        expect(err).to.be.equal("error");
 
-                        done();
-//                    });
-//                });
+                            done();
+    //                    });
+    //                });
+                });
+
             });
-
         });
+        
 
     });
 });

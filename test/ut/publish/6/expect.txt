@@ -1,0 +1,25 @@
+  {
+    "name": "smart-cov",
+    "version": "0.0.2",
+    "description": "JS code coverage tool that computes statement, function and branch coverage",
+    "keywords": [
+      "coverage",
+      "code coverage",
+      "JS code coverage",
+      "JS coverage"
+    ],
+    "author": {
+      "name": "tianlili",
+      "email": "tianlili@baidu.com"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/tianlili/smart-cov.git"
+    },
+    "_id": "smart-cov",
+    "maintainers": [
+      {
+        "name": "tan"
+      }
+    ]
+  }
