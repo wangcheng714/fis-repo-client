@@ -15,13 +15,16 @@ describe('search', function(){
     var result3 = fs.readFileSync(dir3+'/expect.txt','utf-8').replace(/\r\n/g, '\n');
     before(function(done){
         client.adduser('tan','tan','tan@baidu.com',function(){
-            client.publish(dir1, {}, function(){
-                client.publish(dir2, {}, function(){
-                    client.publish(dir3, {}, function(){
-                        done();
+            client.unpublish({name : "smart-cov"}, {}, function(){
+                client.publish(dir1, {}, function(){
+                    client.publish(dir2, {}, function(){
+                        client.publish(dir3, {}, function(){
+                            done();
+                        });
                     });
                 });
             });
+            
         });
     });
     after(function(done){

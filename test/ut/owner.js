@@ -17,6 +17,7 @@ describe('add--', function(){
         name : "smart-cov",
         version : "0.0.2"
     };
+
  
     // it('no adder',function(done){
     //     var options = {
@@ -29,23 +30,25 @@ describe('add--', function(){
     //     });
 
     // });
+    
 
     it('add owner to pkg not exist + ls non-exist pkg', function(done){
         var options = {
             username : "tan"
         };
 
-        client.adduser('tan','tan','tan@baidu.com',function(){
-            client.owner('add',pkg1,options, function(err){
-                expect(err).to.be.equal("Component [smart-cov@0.0.1] not found!");
+        
+            client.adduser('tan','tan','tan@baidu.com',function(){
+                client.owner('add',pkg1,options, function(err){
+                    expect(err).to.be.equal("Component [smart-cov@0.0.1] not found!");
 
-                client.owner('ls', pkg1, options, function(err){
-                    expect(err).to.be.equal("Component [smart-cov]@0.0.1 not found!");
-                    done();
-                })
+                    client.owner('ls', pkg1, options, function(err){
+                        expect(err).to.be.equal("Component [smart-cov]@0.0.1 not found!");
+                        done();
+                    });
 
+                });
             });
-        });
     });
 
     it('no added', function(done){

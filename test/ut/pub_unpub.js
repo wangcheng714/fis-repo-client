@@ -8,7 +8,7 @@ var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
 describe("publish", function(){
     it("no package.json", function(done){
         client.adduser('tian', 'tian', 'tian@baidu.com', function(error, message){
-            client.publish("./publish/1", {}, function(error){
+            client.publish("./test/ut/publish/1", {}, function(error){
                 expect(error).to.contain("Could not publish, missing file");
                 done();
             })
@@ -34,15 +34,18 @@ describe("publish", function(){
             name : "smart-cov",
             version : "all"
         };
-        client.unpublish(pkg, {}, function(error, message){
-            client.publish("./publish/4", {}, function(error, message){console.log(error);console.log(message);
-                expect(message).to.equal("\"Publish component [smart-cov@0.0.1] success!\"");
-                fis.db.findOne("pkgs", "tian", {name : "smart-cov"}, function(error, pkg){
-                    expect(pkg.version).to.equal("0.0.1");
-                    done();
-                });
-            })
-        });
+        setTimeout(function(){
+                client.unpublish(pkg, {}, function(error, message){
+                client.publish("./test/ut/publish/4", {}, function(error, message){console.log(error);console.log(message);
+                    expect(message).to.equal("Publish component [smart-cov@0.0.1] success!");
+                    fis.db.findOne("pkgs", "tian", {name : "smart-cov"}, function(error, pkg){
+                        expect(pkg.version).to.equal("0.0.1");
+                        done();
+                    });
+                })
+            });
+            }, 1500);
+        
     });
 
 //    it("publish again", function(done){
@@ -57,14 +60,17 @@ describe("publish", function(){
 //    });
 
     it("publish again - force", function(done){
-        client.publish("./publish/5", {force:true}, function(error, message){
-            expect(message).to.equal("\"Publish component [smart-cov@0.0.1] success!\"");
-            fis.db.findOne("pkgs", "tian", {name : "smart-cov"}, function(error, pkg){
-                expect(pkg.version).to.equal("0.0.1");
-                expect(pkg.readme).to.equal("smart-cov-1");
-                done();
-            });
-        })
+        setTimeout(function(){
+                client.publish("./test/ut/publish/5", {force:true}, function(error, message){
+                expect(message).to.equal("Publish component [smart-cov@0.0.1] success!");
+                fis.db.findOne("pkgs", "tian", {name : "smart-cov"}, function(error, pkg){
+                    expect(pkg.version).to.equal("0.0.1");
+                    expect(pkg.readme).to.equal("smart-cov-1");
+                    done();
+                });
+            })
+        }, 1500);
+        
     });
 
 //    it("publish again - different version", function(done){

@@ -36,7 +36,7 @@ describe("install", function(){
     });
 
     it("special version", function(done){
-        var dir = './install/2',
+        var dir = './test/ut/install/2',
             pkg = {
                 name : "smart-cov",
                 version: "0.0.1"
@@ -52,19 +52,34 @@ describe("install", function(){
     });
 
     it("scaffold", function(done){
-        var dir = './install/3',
+        var dir = './test/ut/install/3',
             pkg = {
                 name : "smart-cov",
                 version: "0.0.3"
             };
         client.unpublish(pkg, {}, function(error, message){
-            client.publish("./publish/7", {}, function(error, message){
-                expect(message).to.equal("\"Publish component [smart-cov@0.0.3] success!\"");
+            client.publish("./test/ut/publish/7", {}, function(error, message){
+                expect(message).to.equal("Publish component [smart-cov@0.0.3] success!");
                 rmTree(dir + "/smart-cov", function(){
-                    client.install(dir, pkg, null, function(error, message){
+                    client.install(dir, pkg, {}, function(error, message){
                         expect(message).to.equal("Component [smart-cov@0.0.3] Install Success.");
                         var file = fs.readFileSync(dir + "/smart-cov/package.json", "utf8");
                         expect(JSON.parse(file).version).to.equal("0.0.3");
+
+                        // //确认改名成功
+                        // expect( fs.existsSync(dir + "/smart-cov/f.html") ).to.be.true;
+                        // expect( fs.existsSync(dir + "/smart-cov/d") ).to.be.true;
+                        // // //BUG unsolved
+                        // // expect( fs.existsSync(dir + "/smart-cov/d/f") ).to.be.true;
+
+                        // file = fs.readFileSync(dir + "/smart-cov/f.html", "utf8");
+                        // expect(file).to.contain("hello");
+                        // file = fs.readFileSync(dir + "/smart-cov/cli.js", "utf8");
+                        // expect(file).to.equal("var a = v + a;");
+                        // // //BUG unsolved
+                        // // file = fs.readFileSync(dir + "/smart-cov/d/f", "utf8");
+                        // // expect(file).to.contain("hello");
+
                         done();
                     });
                 });
