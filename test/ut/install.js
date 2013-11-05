@@ -8,6 +8,23 @@ var rmTree = require("../util/removeDir.js").rmTree;
 var fs = require('fs');
 
 describe("install", function(){
+    before(function(done){
+    //publish smart-cov@0.0.1
+        client.publish("./test/ut/publish/4", {}, function(){
+            done();
+        })
+    });
+
+    after(function(done){
+        var pkg = {
+            name : "smart-cov",
+            version : "0.0.1"
+        };
+        client.unpublish(pkg, {}, function(){
+            done();
+        });
+    });
+
     it("not exist pkg", function(done){
         var dir = './install/1',
             pkg = {
@@ -29,7 +46,6 @@ describe("install", function(){
             };
 
         client.install(dir, pkg, null, function(error, message){
-            console.log(error);
             expect(error.toString()).to.equal("Component [smart-cov@0.0.10] not found!");
             done();
         });

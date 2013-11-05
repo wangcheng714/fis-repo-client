@@ -7,18 +7,17 @@ var expect = require('chai').expect;
 var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
 
 //entaining with ensurance that there is no users or pkgs
+var pkg1 = {
+    name : "smart-cov",
+    version : "0.0.1"
+};
+var pkg2 = {
+    name : "smart-cov",
+    version : "0.0.2"
+};
 
 describe('add--', function(){
-    var pkg1 = {
-        name : "smart-cov",
-        version : "0.0.1"
-    };
-    var pkg2 = {
-        name : "smart-cov",
-        version : "0.0.2"
-    };
 
- 
     // it('no adder',function(done){
     //     var options = {
     //         username : "tan"
@@ -36,31 +35,30 @@ describe('add--', function(){
         var options = {
             username : "tan"
         };
-
         
             client.adduser('tan','tan','tan@baidu.com',function(){
-                client.owner('add',pkg1,options, function(err){
+                client.owner('add',pkg1,options, function(err,m){
                     expect(err).to.be.equal("Component [smart-cov@0.0.1] not found!");
 
-                    client.owner('ls', pkg1, options, function(err){
+                    client.owner('ls', pkg1, options, function(err,m){
                         expect(err).to.be.equal("Component [smart-cov]@0.0.1 not found!");
                         done();
                     });
 
                 });
             });
+        
     });
 
     it('no added', function(done){
-        var dir1 = __dirname+'/publish/4';
+        var dir1 = "./test/ut/publish/4";
         var options = {
             username : "lily"
         };
 
-        setTimeout(
-            client.publish(dir1, {}, function(){
-
-                client.owner('add',pkg1, options,function(error){
+        client.adduser('tan','tan','tan@baidu.com',function(e,m){
+            client.publish(dir1, {}, function(e,m){
+                client.owner('add',pkg1, options,function(error,m){
                     expect(error).to.be.equal("User [lily] not exist, register first!");
                     
                     // client.owner('ls',pkg1,{}, function(err, msg){
@@ -70,9 +68,8 @@ describe('add--', function(){
                     // });
 
                 });
-
-            })
-            , 10000);
+            });
+        });
 
     });
 
@@ -81,12 +78,10 @@ describe('add--', function(){
             username : "tan"
         };
 
-        setTimeout(
             client.owner('add',pkg1, options,function(err,msg){
                 expect(msg).to.be.equal("Add user [tan] success!");
                 done();
-            })
-            , 10000);
+            });
 
 
     });

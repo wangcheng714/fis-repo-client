@@ -34,17 +34,15 @@ describe("publish", function(){
             name : "smart-cov",
             version : "all"
         };
-        setTimeout(function(){
-                client.unpublish(pkg, {}, function(error, message){
-                client.publish("./test/ut/publish/4", {}, function(error, message){console.log(error);console.log(message);
-                    expect(message).to.equal("Publish component [smart-cov@0.0.1] success!");
-                    fis.db.findOne("pkgs", "tian", {name : "smart-cov"}, function(error, pkg){
-                        expect(pkg.version).to.equal("0.0.1");
-                        done();
-                    });
-                })
+        client.unpublish(pkg, {}, function(error, message){
+            client.publish("./test/ut/publish/4", {}, function(error, message){
+                expect(message).to.equal("Publish component [smart-cov@0.0.1] success!");
+                fis.db.findOne("pkgs", "tian", {name : "smart-cov"}, function(error, pkg){
+                    expect(pkg.version).to.equal("0.0.1");
+                    done();
+                });
             });
-            }, 1500);
+        });
         
     });
 
@@ -60,16 +58,14 @@ describe("publish", function(){
 //    });
 
     it("publish again - force", function(done){
-        setTimeout(function(){
-                client.publish("./test/ut/publish/5", {force:true}, function(error, message){
-                expect(message).to.equal("Publish component [smart-cov@0.0.1] success!");
-                fis.db.findOne("pkgs", "tian", {name : "smart-cov"}, function(error, pkg){
-                    expect(pkg.version).to.equal("0.0.1");
-                    expect(pkg.readme).to.equal("smart-cov-1");
-                    done();
-                });
-            })
-        }, 1500);
+        client.publish("./test/ut/publish/5", {force:true}, function(error, message){
+            expect(message).to.equal("Publish component [smart-cov@0.0.1] success!");
+            fis.db.findOne("pkgs", "tian", {name : "smart-cov"}, function(error, pkg){
+                expect(pkg.version).to.equal("0.0.1");
+                expect(pkg.readme).to.equal("smart-cov-1");
+                done();
+            });
+        });
         
     });
 
