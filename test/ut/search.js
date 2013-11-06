@@ -15,7 +15,7 @@ describe('search', function(){
     var result3 = fs.readFileSync(dir3+'/expect.txt','utf-8').replace(/\r\n/g, '\n');
     before(function(done){
         client.adduser('tan','tan','tan@baidu.com',function(){
-            client.unpublish({name : "smart-cov"}, {}, function(){
+            client.unpublish({name : "smart-cov",version:"all"}, {}, function(){
                 client.publish(dir1, {}, function(){
                     client.publish(dir2, {}, function(){
                         client.publish(dir3, {}, function(){
@@ -28,14 +28,8 @@ describe('search', function(){
         });
     });
     after(function(done){
-        client.unpublish(dir1, {}, function(){
-            client.unpublish(dir2, {}, function(){
-                client.unpublish(dir3, {}, function(){
-                    fis.db.remove("user", "tan", {name : "tan"}, {}, function(){
-                        done();
-                    });
-                });
-            });
+        client.unpublish({name : "smart-cov",version:"all"}, {}, function(done){
+            done();
         });
     });
     it('search name',function(done){
