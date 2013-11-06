@@ -15,7 +15,7 @@ describe('search', function(){
     var result3 = fs.readFileSync(dir3+'/package.json','utf-8');
     before(function(done){
         client.adduser('tan','tan','tan@baidu.com',function(){
-            // client.unpublish({name : "smart-cov",version:"all"}, {}, function(){
+            client.unpublish({name : "smart-cov",version:"all"}, {}, function(){
                 client.publish(dir1, {}, function(){
                     client.publish(dir2, {}, function(){
                         client.publish(dir3, {}, function(){
@@ -23,15 +23,15 @@ describe('search', function(){
                         });
                     });
                 });
-            // });
+            });
             
         });
     });
-    // after(function(done){
-    //     client.unpublish({name : "smart-cov",version:"all"}, {}, function(done){
-    //         done();
-    //     });
-    // });
+    after(function(done){
+        client.unpublish({name : "smart-cov",version:"all"}, {}, function(done){
+            done();
+        });
+    });
     it('search name',function(done){
         //同一个包只能搜到最新版本包的信息
         client.search("smart-cov",function(err,msg){
