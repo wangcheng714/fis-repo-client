@@ -1,7 +1,7 @@
 module.exports = RepoClient;
 
 function RepoClient(domain, port){
-    this.url = "http://" + domain + ":" + port + "/fisrepo/cli_";
+    this.url = "http://" + domain + ":" + port + "/repos/cli_";
 }
 
 require('fs').readdirSync(__dirname + "/lib").forEach(function (f) {
