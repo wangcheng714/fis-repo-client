@@ -145,7 +145,7 @@ describe('delete--', function(){
 //        client.adduser('tan','tan','tan@baidu.com');
 //    });
     after(function(done){
-        client.unpublish({name:"smart-cov",version:"all"}}, {}, function(){
+        client.unpublish({name:"smart-cov",version:"all"}, {}, function(){
             // fis.db.remove("user", "tan", {name : "tan"}, {}, function(){
             //     fis.db.remove("user", "tmp", {name : "tan"}, {}, function(){
                     done();
