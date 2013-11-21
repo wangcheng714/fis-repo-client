@@ -1,0 +1,41 @@
+{
+  "name": "smart-cov",
+  "version": "0.0.3",
+  "description": "JS code coverage tool that computes statement, function and branch coverage",
+  "keywords": [
+    "coverage",
+    "code coverage",
+    "JS code coverage",
+    "JS coverage"
+  ],
+  "author": {
+    "name": "tianlili",
+    "email": "tianlili@baidu.com"
+  },
+  "bin": {
+    "smart-cov": "./cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tianlili/smart-cov.git"
+  },
+  "dependencies": {
+    "escodegen": "0.0.x",
+    "mkdirp": "0.3.x",
+    "nopt": "2.1.x",
+    "fileset": "0.1.x",
+    "async": "0.2.x",
+    "abbrev": "1.0.x",
+    "wordwrap": "0.0.x"
+  },
+  "readme": "smart-cov-3",
+   "scaffold" : {
+     "auth" : "Input your name:",
+     "dir" : "Input the directory name:",
+     "file" : "Input the filename:",
+     "title" : "Input the title:",
+     "version" : "Input the version:",
+     "file.html" : "afdasdf"
+   }
+
+}
