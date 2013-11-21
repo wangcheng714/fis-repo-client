@@ -8,7 +8,7 @@ var dir2 = __dirname+'/publish/6';              //smart-cov-0.0.2
 
 describe('prepare for search',function(){
     it('publish', function(done){
-        client.adduser('tan','tan','tan@baidu.com',function(){
+        client.adduser('tian','tian','tian@baidu.com',function(){
             client.unpublish({name : "smart-cov",version:"all"}, {}, function(){
                         client.publish(dir2, {}, function(e,m){
                             expect(m).to.equal("Publish component [smart-cov@0.0.2] success!");

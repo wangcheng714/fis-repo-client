@@ -14,7 +14,7 @@ describe('search', function(){
     var result2 = fs.readFileSync(dir2+'/package.json','utf-8');
     var result3 = fs.readFileSync(dir3+'/package.json','utf-8');
     before(function(done){
-        client.adduser('tan','tan','tan@baidu.com',function(){
+        client.adduser('tian','tian','tian@baidu.com',function(){
             // client.unpublish({name : "smart-cov",version:"all"}, {}, function(){
                     // client.publish(dir2, {}, function(){
                         client.publish(dir3, {}, function(){
