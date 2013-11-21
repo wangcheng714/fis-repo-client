@@ -3,7 +3,7 @@ var RepoClient = require("../../fis-repo-client.js"),
     domain = "localhost",
     port = "3459",
     client = new RepoClient(domain,port);
-var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
+// var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
 var rmTree = require("../util/removeDir.js").rmTree;
 var fs = require('fs');
 

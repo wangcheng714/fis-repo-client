@@ -3,7 +3,7 @@ var RepoClient = require("../../fis-repo-client.js"),
     port = "3459",
     client = new RepoClient(domain,port);
 var expect = require('chai').expect;
-var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
+// var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
 var fs = require('fs');
 
 describe('search', function(){
@@ -15,21 +15,21 @@ describe('search', function(){
     var result3 = fs.readFileSync(dir3+'/package.json','utf-8');
     before(function(done){
         client.adduser('tan','tan','tan@baidu.com',function(){
-            client.unpublish({name : "smart-cov",version:"all"}, {}, function(){
-                client.publish(dir1, {}, function(){
-                    client.publish(dir2, {}, function(){
+            // client.unpublish({name : "smart-cov",version:"all"}, {}, function(){
+                    // client.publish(dir2, {}, function(){
                         client.publish(dir3, {}, function(){
                             done();
                         });
-                    });
-                });
-            });
+                    // });
+            // });
             
         });
     });
     after(function(done){
-        client.unpublish({name : "smart-cov",version:"all"}, {}, function(done){
-            done();
+        client.unpublish({name : "smart-cov",version:"all"}, {}, function(){
+            client.unpublish({name : "cov",version:"all"}, {}, function(){
+                done();
+            });
         });
     });
     it('search name',function(done){
@@ -51,7 +51,10 @@ describe('search', function(){
                 expect(msg).to.contain(JSON.parse(result3).repository.url);
 
                     client.search("Smart-cov",function(err,msg){
-                        expect(msg).to.deep.equal("[]");
+                        expect(msg).to.contain(JSON.parse(result2).version);
+                        expect(msg).to.contain(JSON.parse(result2).name);
+                        expect(msg).to.contain(JSON.parse(result2).author.name);
+                        expect(msg).to.contain(JSON.parse(result2).repository.url);
 
                         done();
                     });

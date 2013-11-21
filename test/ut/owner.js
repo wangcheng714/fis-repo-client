@@ -20,11 +20,11 @@ describe('add--', function(){
 
     // it('no adder',function(done){
     //     var options = {
-    //         username : "tan"
+    //         username : "tian"
     //     };
 
     //     client.owner('add', pkg1, options, function(error){
-    //         expect(error).to.be.equal("User [tan] not exist, register first!");
+    //         expect(error).to.be.equal("User [tian] not exist, register first!");
     //         done();
     //     });
 
@@ -33,10 +33,10 @@ describe('add--', function(){
 
     it('add owner to pkg not exist + ls non-exist pkg', function(done){
         var options = {
-            username : "tan"
+            username : "tian"
         };
         
-            client.adduser('tan','tan','tan@baidu.com',function(){
+            client.adduser('tian','tian','tian@baidu.com',function(){
                 client.owner('add',pkg1,options, function(err,m){
                     expect(err).to.be.equal("Component [smart-cov@0.0.1] not found!");
 
@@ -56,13 +56,13 @@ describe('add--', function(){
             username : "lily"
         };
 
-        client.adduser('tan','tan','tan@baidu.com',function(e,m){
+        client.adduser('tian','tian','tian@baidu.com',function(e,m){
             client.publish(dir1, {}, function(e,m){
                 client.owner('add',pkg1, options,function(error,m){
                     expect(error).to.be.equal("User [lily] not exist, register first!");
                     
                     // client.owner('ls',pkg1,{}, function(err, msg){
-                    //     expect(msg).to.be.equal("\nusername : tan email : tan@baidu.com\n");
+                    //     expect(msg).to.be.equal("\nusername : tian email : tian@baidu.com\n");
 
                         done();
                     // });
@@ -75,11 +75,11 @@ describe('add--', function(){
 
     it('owner twice', function(done){
         var options = {
-            username : "tan"
+            username : "tian"
         };
 
             client.owner('add',pkg1, options,function(err,msg){
-                expect(msg).to.be.equal("Add user [tan] success!");
+                expect(msg).to.be.equal("Add user [tian] success!");
                 done();
             });
 
@@ -91,11 +91,11 @@ describe('add--', function(){
 //        setTimeout(
 //            client.publish(dir2, {force:true}, function(){
 //
-//                client.owner('ls',pkg1,{username:"tan"}, function(err, msg){
-//                    expect(msg).to.be.equal("\nusername : tan email : tan@baidu.com\n");
+//                client.owner('ls',pkg1,{username:"tian"}, function(err, msg){
+//                    expect(msg).to.be.equal("\nusername : tian email : tian@baidu.com\n");
 //
-//                    client.owner('ls',pkg2,{username:"tan"}, function(err, msg){
-//                        expect(msg).to.be.equal("\nusername : tan email : tan@baidu.com\n");
+//                    client.owner('ls',pkg2,{username:"tian"}, function(err, msg){
+//                        expect(msg).to.be.equal("\nusername : tian email : tian@baidu.com\n");
 //                        done();
 //                    });
 //                });
@@ -111,15 +111,15 @@ describe('add--', function(){
 
         client.adduser('lily','lily','lily@baidu.com',function(){
             //更换权限用户
-            client.adduser('tan','tan','tan@baidu.com',function(){
+            client.adduser('tian','tian','tian@baidu.com',function(){
                 client.owner('add',pkg1, options,function(error,msg){
                     expect(msg).to.be.equal("Add user [lily] success!");
 
                     client.owner('ls',pkg1,{}, function(err, msg){
-                        expect(msg).to.be.equal("\nusername : tan email : tan@baidu.com\nusername : lily email : lily@baidu.com\n");
+                        expect(msg).to.be.equal("\nusername : tian email : tian@baidu.com\nusername : lily email : lily@baidu.com\n");
 
 //                        client.owner('ls',pkg2,{username:"lily"}, function(err, msg){
-//                            expect(msg).to.be.equal("\nusername : tan email : tan@baidu.com\nusername : lily email : lily@baidu.com\n");
+//                            expect(msg).to.be.equal("\nusername : tian email : tian@baidu.com\nusername : lily email : lily@baidu.com\n");
                             done();
 //                        });
                     });
@@ -142,12 +142,12 @@ describe('delete--', function(){
         version : "0.0.2"
     };
 //    before(function(){
-//        client.adduser('tan','tan','tan@baidu.com');
+//        client.adduser('tian','tian','tian@baidu.com');
 //    });
     after(function(done){
         client.unpublish({name:"smart-cov",version:"all"}, {}, function(){
-            // fis.db.remove("user", "tan", {name : "tan"}, {}, function(){
-            //     fis.db.remove("user", "tmp", {name : "tan"}, {}, function(){
+            // fis.db.remove("user", "tian", {name : "tian"}, {}, function(){
+            //     fis.db.remove("user", "tmp", {name : "tian"}, {}, function(){
                     done();
             //     });
             // });
@@ -163,10 +163,10 @@ describe('delete--', function(){
             expect(msg).to.be.equal("Remove user [lily] success!");
 
             client.owner('ls',pkg1,{}, function(err, msg){
-                expect(msg).to.be.equal("\nusername : tan email : tan@baidu.com\n");
+                expect(msg).to.be.equal("\nusername : tian email : tian@baidu.com\n");
 
 //                client.owner('ls',pkg2,{username:"lily"}, function(err, msg){
-//                    expect(msg).to.be.equal("\nusername : tan email : tan@baidu.com\n");
+//                    expect(msg).to.be.equal("\nusername : tian email : tian@baidu.com\n");
                     done();
 //                });
             });
@@ -201,7 +201,7 @@ describe('delete--', function(){
 
     it('deleter is not owner + lser is not owner',function(done){
         var options = {
-            username : "tan"
+            username : "tian"
         };
 
         client.adduser('tmp','tmp','tmp@baidu.com',function(){
@@ -209,7 +209,7 @@ describe('delete--', function(){
                 expect(err).to.be.equal("No permission rm owner for component [smart-cov@0.0.1]");
 
                 client.owner('ls',pkg1, options, function(err,msg){
-                    expect(msg).to.be.equal("\nusername : tan email : tan@baidu.com\n");
+                    expect(msg).to.be.equal("\nusername : tian email : tian@baidu.com\n");
 
                     done();
                 });
@@ -223,11 +223,11 @@ describe('delete--', function(){
 //    //BUG--add after bug fixed, otherwise will produce non-maintainer pkg
 //    it('self del',function(done){
 //        var options = {
-//            username : "tan"
+//            username : "tian"
 //        };
 //
 //        fis.db.remove("user", "tmp", {name : "tmp"}, {}, function(){
-//            client.adduser('tan','tan','tan@baidu.com',function(){
+//            client.adduser('tian','tian','tian@baidu.com',function(){
 //                client.owner('rm',pkg1,options, function(err){
 //                    expect(err).to.be.equal("No permission rm owner for component [smart-cov@0.0.1]");
 //
@@ -239,11 +239,11 @@ describe('delete--', function(){
 
     it('del for pkg not exist + ls for nonexist version',function(done){
         var options = {
-            username : "tan"
+            username : "tian"
         };
 
-        client.adduser('tan','tan','tan@baidu.com',function(){
-            client.unpublish(pkg1, {}, function(){
+        client.adduser('tian','tian','tian@baidu.com',function(){
+            client.unpublish(pkg1, {}, function(e,m){
                 client.owner('rm',pkg1,options, function(err){
                     expect(err).to.be.equal("Component [smart-cov@0.0.1] not found!");
 
