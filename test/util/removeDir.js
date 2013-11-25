@@ -2,7 +2,7 @@ var p = require('path'),
     fs = require('fs');
 //异步删除文件夹
 var rmTree = exports.rmTree = function(path, callback) {
-    p.exists(path, function(exists) {
+    fs.exists(path, function(exists) {
         //如果文件路径不存在或文件路径不是文件夹则直接返回
         if (!exists || !fs.statSync(path).isDirectory()) return callback();
         fs.readdir(path, function(err, files) {
