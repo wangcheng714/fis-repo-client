@@ -8,6 +8,7 @@ var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
 var fs = require('fs');
 
 describe('search', function(){
+    //发布cov@0.0.1包，与之前发布的smart-cov包进行search功能验证
     var dir1 = __dirname+'/publish/4';              //smart-cov-0.0.1
     var dir2 = __dirname+'/publish/6';              //smart-cov-0.0.2
     var dir3 = __dirname+'/publish/cov-0.0.1';      //cov-0.0.1

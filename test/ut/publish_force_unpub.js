@@ -13,12 +13,16 @@ var fs = require('fs');
 describe("publish", function(){
  
     it("publish again - force", function(done){
+        //publish --force功能
         client.adduser('tian', 'tian', 'tian@baidu.com', function(error, message){
             client.publish("./test/ut/publish/5", {force:true}, function(error, message){
                 expect(message).to.equal("Publish component [smart-cov@0.0.1] success!");
                 fis.db.findOne("pkgs", "tian", {name : "smart-cov"}, function(error, pkg){
                     expect(pkg.version).to.equal("0.0.1");
-                    expect(pkg.readme).to.equal("smart-cov-1");
+                    expect(pkg.readme).to.equal("smart-cov-1");                    
+                    expect(pkg.latest).to.equal("0.0.1");
+                    expect(pkg.versionHistory).to.contain("0.0.1");
+
                     done();
                 });
             });
@@ -27,7 +31,7 @@ describe("publish", function(){
     });
 
     it("ignore", function(done){
-
+        //ignore文件功能
         var dir = './test/ut/install/2',
             pkg = {
                 name : "smart-cov",
