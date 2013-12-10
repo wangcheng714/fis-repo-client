@@ -4,7 +4,7 @@ var RepoClient = require("../../fis-repo-client.js"),
     repos = domain + ":" + port,
     client = new RepoClient(repos);
 var expect = require('chai').expect;
-// var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
+var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
 var fs = require('fs');
 
 describe('search', function(){
@@ -19,7 +19,12 @@ describe('search', function(){
             // client.unpublish({name : "smart-cov",version:"all"}, {}, function(){
                     // client.publish(dir2, {}, function(){
                         client.publish(dir3, {}, function(){
-                            done();
+                            fis.db.findOne("pkgs", "tian", {name : "cov"}, function(error, pkg){
+                                expect(pkg.version).to.equal("0.0.1");
+                                expect(pkg.latest).to.equal("0.0.1");
+                                expect(pkg.versionHistory).to.contain("0.0.1");
+                                done();
+                            });
                         });
                     // });
             // });

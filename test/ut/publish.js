@@ -40,6 +40,9 @@ describe("publish", function(){
                 expect(message).to.equal("Publish component [smart-cov@0.0.1] success!");
                 fis.db.findOne("pkgs", "tian", {name : "smart-cov"}, function(error, pkg){
                     expect(pkg.version).to.equal("0.0.1");
+                    expect(pkg.latest).to.equal("0.0.1");
+                    expect(pkg.versionHistory).to.contain("0.0.1");
+                    
                     done();
                 });
             });
