@@ -2,7 +2,8 @@
 var RepoClient = require("../../fis-repo-client.js"),
     domain = "localhost",
     port = "3459",
-    client = new RepoClient(domain,port);
+    repos = domain + ":" + port,
+    client = new RepoClient(repos);
 var expect = require('chai').expect;
 var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
 

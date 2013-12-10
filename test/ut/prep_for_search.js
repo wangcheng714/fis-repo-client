@@ -1,7 +1,8 @@
 var RepoClient = require("../../fis-repo-client.js"),
     domain = "localhost",
     port = "3459",
-    client = new RepoClient(domain,port);
+    repos = domain + ":" + port;
+    client = new RepoClient(repos);
 var expect = require('chai').expect;
 
 var dir2 = __dirname+'/publish/6';              //smart-cov-0.0.2
