@@ -11,7 +11,8 @@
     "archiver": "0.4.9",
     "adm-zip": "0.4.3",
     "async": "0.2.9",
-	"ignore":"2.2.7"
+	  "ignore":"2.2.7",
+    "fis-cloud-kernel":"*"
   },
   "devDependencies": {},
   "scripts": {

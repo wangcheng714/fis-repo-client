@@ -4,7 +4,7 @@ var RepoClient = require("../../fis-repo-client.js"),
     port = "3459",
     repos = domain + ":" + port,
     client = new RepoClient(repos);
-var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
+var fis =  require('fis-cloud-kernel');
 
 describe('basic', function(){
     it('first time - tian', function(done){

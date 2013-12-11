@@ -1,4 +1,4 @@
-var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
+var fis =  require('fis-cloud-kernel');
 var expect = require('chai').expect;
 
 describe('delete', function(){

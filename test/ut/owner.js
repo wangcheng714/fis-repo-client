@@ -5,7 +5,7 @@ var RepoClient = require("../../fis-repo-client.js"),
     repos = domain + ":" + port,
     client = new RepoClient(repos);
 var expect = require('chai').expect;
-var fis =  require("../../../fis-cloud-kernel/fis-cloud-kernel.js");
+var fis =  require('fis-cloud-kernel');
 
 //entaining with ensurance that there is no users or pkgs
 var pkg1 = {
