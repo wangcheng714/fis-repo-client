@@ -12,8 +12,7 @@
     "adm-zip": "0.4.3",
     "async": "0.2.9",
 	  "ignore":"2.2.7",
-    "form-data": "~0.1.0",
-    "fis-cloud-kernel":"*"
+    "form-data": "~0.1.0"
   },
   "devDependencies": {},
   "scripts": {
