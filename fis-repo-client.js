@@ -1,5 +1,23 @@
 module.exports = RepoClient;
 
+//support i18n
+function get_local_lang(local) {
+    var read = require('fs').readFileSync;
+    return JSON.parse(read(__dirname + '/lang/' + local + '.json'));
+}
+
+function gettext (s) {
+    var trans = get_local_lang('en-US');
+    if (trans[s]) {
+        return trans[s];
+    }
+    return s;
+}
+
+Object.defineProperty(global, '__', {
+    value: gettext
+});
+
 function RepoClient(repos){
     var reg = /^http:\/\/(.*)/i;
     if(!repos.match(reg)){
