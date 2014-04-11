@@ -34,7 +34,7 @@ describe('basic', function(){
     it('first time - wrong email', function(done){
         fis.db.remove("user", "tian", {name : "tian"}, {}, function(err, result){
             client.adduser('tian', 'tian', 'tian', function(error){
-                expect(error).to.be.equal("email 格式不正确");
+                expect(error).to.be.equal("invalid format of email");
                 fis.db.findOne("user", "tian", {name : "tian"}, function(err, result){
                     expect([undefined, null]).to.contain(result);
                     done();
