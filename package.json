@@ -11,9 +11,11 @@
     "archiver": "0.4.9",
     "adm-zip": "0.4.3",
     "async": "0.2.9",
-	  "ignore":"2.2.7",
+	"ignore":"2.2.7",
     "form-data": "~0.1.0",
-    "init-package-json": "0.0.15"
+    "init-package-json": "0.0.15",
+    "debug" : "0.8.0",
+    "q" : "1.0.1"
   },
   "devDependencies": {},
   "scripts": {
