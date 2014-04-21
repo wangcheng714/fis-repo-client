@@ -18,6 +18,10 @@ Object.defineProperty(global, '__', {
     value: gettext
 });
 
+Object.defineProperty(global, 'install_list', {
+    value: []
+});
+
 function RepoClient(repos){
     var reg = /^http:\/\/(.*)/i;
     if(!repos.match(reg)){
